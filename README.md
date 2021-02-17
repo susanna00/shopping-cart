@@ -53,6 +53,9 @@ def to_usd(my_price):
 
 print(products)
 ````
+Now you are ready to proceed with the virtual environment setup. 
+
+## Environment Setup 
 
 
 
