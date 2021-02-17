@@ -1,15 +1,3 @@
-# shopping-cart
-
-# Setup 
-## Repo Setup 
-
-On Github.com create a new repository called "shopping-cart" with a "README.md" file and a Python-flavored ".gitignore" file. Finally, download the repository on your computer's Desktop. 
-
-Use the the text editor or command-line to create in your repository a file called "shopping_cart.py", where you need to paste the following contents inside: 
-
-> NOTE: Always remember to save your files once you are done editing them. 
-
-````sh 
 # shopping_cart.py
 
 products = [
@@ -52,7 +40,3 @@ def to_usd(my_price):
 # TODO: write some Python code here to produce the desired output
 
 print(products)
-````
-
-
-
