@@ -78,7 +78,7 @@ total_price = subtotal_price + tax
 
 print("---------------------------------")
 print("SUBTOTAL: " + to_usd(subtotal_price))        # The total cost of all shopping cart items
-print("TAX: " + to_usd(tax))        # The amount of tax owed
+print("TAX (6%): " + to_usd(tax))        # The amount of tax owed
 print("TOTAL: " + to_usd(total_price))      # The total amount owed, formatted as US dollars and cents
 print("---------------------------------")
 print("Thank you for shopping with us, we hope to see you soon!")       # A friendly message thanking the customer and/or encouraging the customer to shop again
