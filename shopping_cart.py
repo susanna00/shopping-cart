@@ -27,12 +27,14 @@ products = [
 def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
 
-print(products)
 
 #
 # Information input
 #
 
+selected_id = input("Please input a product identifier, or 'DONE' if there are no more identifier:") #> "g" (string)
+print(selected_id)
+print(type(selected_id))
 
 
 
