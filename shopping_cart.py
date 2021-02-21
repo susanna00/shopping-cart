@@ -81,7 +81,7 @@ total_price = subtotal_price + tax
 
 print("---------------------------------")
 print("Subtotal: " + to_usd(subtotal_price))        # The total cost of all shopping cart items
-print("Plus NYC Sales Tax (8.75%): " + to_usd(tax))        # The amount of tax owed
+print("Plus NY Sales Tax: " + to_usd(tax))        # The amount of tax owed
 print("Total: " + to_usd(total_price))      # The total amount owed, formatted as US dollars and cents
 print("---------------------------------")
 print("Thank you for shopping with us, we hope to see you soon!")       # A friendly message thanking the customer and/or encouraging the customer to shop again
