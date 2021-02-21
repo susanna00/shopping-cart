@@ -54,7 +54,7 @@ print("ITALIAN GROCERY")        # Print a grocery store name of your choice
 print("---------------------------------")
 print("Phone Number: +1 (202)-364-0187") 
 print("Website: WWW.SHOP-ITALIAN-GROCERY.COM") 
-print("Address: 3700 O Str N.W. Washington, D.C. 20057")      # A grocery store  website URL and address of choice
+print("Address: 8071 West Amerige Street, New York City, NY 10009")      # A grocery store  website URL and address of choice
 print("---------------------------------")
 print("Checkout Time: " + checkout_start_at.strftime("%Y-%m-%d %I:%M %p"))        # The date and time of the beginning of the checkout process, formatted in a human-friendly way
 print("---------------------------------")
@@ -71,7 +71,7 @@ for selected_id in selected_ids:
     matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
     matching_product = matching_products[0]
     subtotal_price = subtotal_price + matching_product["price"]
-    print("..." + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
+    print("+ " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
 
 TAX_RATE = float(os.environ.get("TAX_RATE"))
 
@@ -80,9 +80,9 @@ tax = subtotal_price * TAX_RATE
 total_price = subtotal_price + tax 
 
 print("---------------------------------")
-print("SUBTOTAL: " + to_usd(subtotal_price))        # The total cost of all shopping cart items
-print("TAX (8.75%): " + to_usd(tax))        # The amount of tax owed
-print("TOTAL: " + to_usd(total_price))      # The total amount owed, formatted as US dollars and cents
+print("Subtotal: " + to_usd(subtotal_price))        # The total cost of all shopping cart items
+print("Plus NYC Sales Tax (8.75%): " + to_usd(tax))        # The amount of tax owed
+print("Total: " + to_usd(total_price))      # The total amount owed, formatted as US dollars and cents
 print("---------------------------------")
 print("Thank you for shopping with us, we hope to see you soon!")       # A friendly message thanking the customer and/or encouraging the customer to shop again
 print("---------------------------------")
