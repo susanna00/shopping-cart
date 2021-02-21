@@ -1,8 +1,9 @@
 # shopping_cart.py
 
 import datetime as dt
-
-TAX_RATE = 0.06
+import os
+from dotenv import load_dotenv 
+load_dotenv()
 
 
 products = [
@@ -34,7 +35,7 @@ products = [
 
 checkout_start_at = dt.datetime.now()
 subtotal_price = 0
-selected_ids = []
+selected_ids = []   #Empty list for all the ids selected
 
 while True:
     selected_id = input("Please input a product identifier, or 'DONE' if there are no more identifier:") #> "g" (string)
@@ -72,13 +73,15 @@ for selected_id in selected_ids:
     subtotal_price = subtotal_price + matching_product["price"]
     print("..." + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
 
+TAX_RATE = float(os.environ.get("TAX_RATE"))
+
 tax = subtotal_price * TAX_RATE
 
 total_price = subtotal_price + tax 
 
 print("---------------------------------")
 print("SUBTOTAL: " + to_usd(subtotal_price))        # The total cost of all shopping cart items
-print("TAX (6%): " + to_usd(tax))        # The amount of tax owed
+print("TAX (8.75%): " + to_usd(tax))        # The amount of tax owed
 print("TOTAL: " + to_usd(total_price))      # The total amount owed, formatted as US dollars and cents
 print("---------------------------------")
 print("Thank you for shopping with us, we hope to see you soon!")       # A friendly message thanking the customer and/or encouraging the customer to shop again
