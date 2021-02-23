@@ -37,10 +37,15 @@ checkout_start_at = dt.datetime.now()
 subtotal_price = 0
 selected_ids = []   #Empty list for all the ids selected
 
+print(products)
+
 while True:
-    selected_id = input("Please input a product identifier, or 'DONE' if there are no more identifier:") #> "g" (string)
+    selected_id = input("Please input a product identifier, or 'DONE' if you are done shopping:") #> "g" (string)
     if selected_id == "DONE":
         break
+    elif int(selected_id) > 20 or int(selected_id) < 1:
+        print("Your product identifier is invalid. Please try again!")
+        exit
     else:
         selected_ids.append(selected_id)
 
@@ -64,6 +69,7 @@ print("---------------------------------")
 
 def to_usd(my_price):
     return f"${my_price:,.2f}" # Price formatted as US dollars and cents
+
 
 print("Shopping Cart Items:")
 

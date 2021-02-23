@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 ## Setup 
 
-In the root directory of your local repository, create a new file called ".env", and update the content of the ".env" file to specify the tax rate that must be applied depending on your location:
+In the root directory of your local repository, create a new file called ".env", and update the content of the ".env" file to specify the tax rate that must be applied depending on your location, see example below:
 
     TAX_RATE= 0.0875
 
