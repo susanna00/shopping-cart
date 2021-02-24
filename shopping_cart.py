@@ -3,6 +3,9 @@
 import datetime as dt
 import os
 from dotenv import load_dotenv 
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail 
+
 load_dotenv()
 
 
@@ -79,6 +82,7 @@ for selected_id in selected_ids:
     subtotal_price = subtotal_price + matching_product["price"]
     print("+ " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
 
+
 TAX_RATE = float(os.environ.get("TAX_RATE"))
 
 tax = subtotal_price * TAX_RATE
@@ -94,4 +98,36 @@ print("Thank you for shopping with us, we hope to see you soon!")       # A frie
 print("---------------------------------")
 
 
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+SENDGRID_TEMPLATE_ID = os.environ.get("SENDGRID_TEMPLATE_ID")
+SENDER_ADDRESS = os.environ.get("SENDER_ADDRESS")
+
+template_data = {
+    "total_price_usd": to_usd(total_price),
+    "human_friendly_timestamp": checkout_start_at.strftime("%Y-%m-%d %I:%M %p") ,
+    "products":[
+        {"id":1, "name": "Product 1"},
+        {"id":2, "name": "Product 2"},
+        {"id":3, "name": "Product 3"},
+        {"id":2, "name": "Product 2"},
+        {"id":1, "name": "Product 1"}
+    ]
+}
+client = SendGridAPIClient(SENDGRID_API_KEY)
+print("CLIENT:", type(client))
+
+message = Mail(from_email=SENDER_ADDRESS, to_emails=SENDER_ADDRESS)
+message.template_id = SENDGRID_TEMPLATE_ID
+message.dynamic_template_data = template_data
+print("MESSAGE:", type(message))
+try:
+    response = client.send(message)
+    print("RESPONSE:", type(response)) 
+    print(response.status_code) 
+    print(response.body)
+    print(response.headers)
+
+except Exception as err:
+    print(type(err))
+    print(err)
 
