@@ -40,7 +40,10 @@ checkout_start_at = dt.datetime.now()
 subtotal_price = 0
 selected_ids = []   #Empty list for all the ids selected
 
-print(products)
+for x in products:
+    print("ID:",x['id'],"|","Item:",x['name'],"|","Price $",x['price'])
+
+print("---------------------------------")
 
 while True:
     selected_id = input("Please input a product identifier, or 'DONE' if you are done shopping:") #> "g" (string)
@@ -101,6 +104,7 @@ print("---------------------------------")
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 SENDGRID_TEMPLATE_ID = os.environ.get("SENDGRID_TEMPLATE_ID")
 SENDER_ADDRESS = os.environ.get("SENDER_ADDRESS")
+RECEIVER_ADDRESS = os.environ.get("RECEIVER_ADDRESS")
 
 template_data = {
     "total_price_usd": to_usd(total_price),
@@ -116,7 +120,7 @@ template_data = {
 client = SendGridAPIClient(SENDGRID_API_KEY)
 print("CLIENT:", type(client))
 
-message = Mail(from_email=SENDER_ADDRESS, to_emails=SENDER_ADDRESS)
+message = Mail(from_email=SENDER_ADDRESS, to_emails=RECEIVER_ADDRESS)
 message.template_id = SENDGRID_TEMPLATE_ID
 message.dynamic_template_data = template_data
 print("MESSAGE:", type(message))

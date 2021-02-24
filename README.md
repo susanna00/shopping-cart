@@ -32,9 +32,13 @@ pip install -r requirements.txt
 
 ## Setup 
 
-In the root directory of your local repository, create a new file called ".env", and update the content of the ".env" file to specify the tax rate that must be applied depending on your location, see example below:
+In the root directory of your local repository, create a new file called ".env", and update the content of the ".env" file to specify:
++ The tax rate that must be applied depending on your location, see example below:
 
     TAX_RATE= 0.0875
+
++ The email address where you want to receive your receipt, see example below:
+    RECEIVER_ADDRESS = sr1192@georgetown.edu 
 
 ## Usage 
 
@@ -42,7 +46,13 @@ Run the shopping cart script from the command-line:
 
     python shopping_cart.py 
 
-Different items will be displayed, type items' IDs, and type DONE when you are done with your shopping list. 
+It will first be displayed a list of the available products with the respective ID and Price. 
 
-The products chosen with the respective prices in USD dollars will be displayed, along with the Subtotal, Taxes applied to your purchase, the Total, and a farewell message. 
+You will have to input the chosen product identifier. 
+
+Once done shopping, please type `DONE`. 
+
+Finally, it will be displayed your receipt with all the products chosen, the respective prices in US dollars, along with the Subtotal, Taxes applied to your purchase, and the Total. 
+
+>NOTE: Remember to first update the content of the ".env" file to receive your receipt via email to your address.
 
