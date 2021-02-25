@@ -2,6 +2,8 @@
 
 This is an example Python application for users/customers to input one or more product identifiers and have their itemized receipt with the total amount owed. 
 
+Let's get started with the ITALIAN GROCERY self checkout program!
+
 ## Prerequisite 
 
 + Anaconda 3.7 +
@@ -14,7 +16,7 @@ Fork this [remote repository](https://github.com/susanna00/shopping-cart) under 
 Then navigate there from your command-line application: 
 
 ```sh 
-cd shopping-cart
+cd ~/Desktop/shopping-cart
 ```
 
 As previously pointed out in the prerequisite, you need to create and activate a new virtual environment, called "shopping-env":
@@ -37,7 +39,7 @@ In the root directory of your local repository, create a new file called ".env",
 
     TAX_RATE= 0.0875
 
-+ The email address where you want to receive your receipt, see example below:
++ The email address where you want to receive your receipt, in case you decide to receive your receipt via email. See example below:
     RECEIVER_ADDRESS = sr1192@georgetown.edu 
 
 ## Usage 
