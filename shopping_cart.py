@@ -81,12 +81,17 @@ def to_usd(my_price):
 
 print("Shopping Cart Items:")
 
+template_products = []
 for selected_id in selected_ids:
     matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
     matching_product = matching_products[0]
     subtotal_price = subtotal_price + matching_product["price"]
     print("+ " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
+    matching_product["price_usd"] = to_usd(matching_product["price"])
+    template_products.append(matching_product)
 
+    
+    
 
 TAX_RATE = float(os.environ.get("TAX_RATE"))
 
@@ -102,48 +107,43 @@ print("---------------------------------")
 print("Thank you for shopping with us, we hope to see you soon!")       # A friendly message thanking the customer and/or encouraging the customer to shop again
 print("---------------------------------")
 
-#email = input("Would you like to receive a copy of your receipt via email? [y/n]")
-#if email == "y":
-#   SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
-#    SENDGRID_TEMPLATE_ID = os.environ.get("SENDGRID_TEMPLATE_ID")
-#    SENDER_ADDRESS = os.environ.get("SENDER_ADDRESS")
-#    RECEIVER_ADDRESS = os.environ.get("RECEIVER_ADDRESS")
+email = input("Would you like to receive a copy of your receipt via email? [y/n]")
+if email == "y":
+    SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+    SENDGRID_TEMPLATE_ID = os.environ.get("SENDGRID_TEMPLATE_ID")
+    SENDER_ADDRESS = os.environ.get("SENDER_ADDRESS")
+    RECEIVER_ADDRESS = os.environ.get("RECEIVER_ADDRESS")
+
 
 # to fix the email template 
-#    template_products = []
+    
 #    for matching_product in matching_products:
 #        template = iter(matching_product['name'])
 #        template_products.append(template)
+  
 
-#    template_prices = []
-#    for matching_product in matching_products:
-#        template1 = iter(to_usd(matching_product['price']))
-#        template_products.append(template1)
+    template_data = {
+       "total_price_usd": to_usd(total_price),
+       "human_friendly_timestamp": checkout_start_at.strftime("%Y-%m-%d %I:%M %p") ,
+       "products":template_products
+    }       #not finished yet 
 
- #   template_data = {
- #       "total_price_usd": to_usd(total_price),
- #       "human_friendly_timestamp": checkout_start_at.strftime("%Y-%m-%d %I:%M %p") ,
- #       "products":[
-  #          {"id": to_usd(matching_product["price"]), "name": matching_product["name"]},
-  #      ]
- #   }       #not finished yet 
+    client = SendGridAPIClient(SENDGRID_API_KEY)
+    print("CLIENT:", type(client))
 
- #   client = SendGridAPIClient(SENDGRID_API_KEY)
- #   print("CLIENT:", type(client))
+    message = Mail(from_email=SENDER_ADDRESS, to_emails=RECEIVER_ADDRESS)
+    message.template_id = SENDGRID_TEMPLATE_ID
+    message.dynamic_template_data = template_data
+    print("MESSAGE:", type(message))
+    try:
+        response = client.send(message)
+        print("RESPONSE:", type(response)) 
+        print(response.status_code) 
+        print(response.body)
+        print(response.headers)
 
-#  message = Mail(from_email=SENDER_ADDRESS, to_emails=RECEIVER_ADDRESS)
-#  message.template_id = SENDGRID_TEMPLATE_ID
-#    message.dynamic_template_data = template_data
-#    print("MESSAGE:", type(message))
-#    try:
-#        response = client.send(message)
-#        print("RESPONSE:", type(response)) 
-#        print(response.status_code) 
-#        print(response.body)
-#        print(response.headers)
-
-#    except Exception as err:
-#        print(type(err))
-#        print(err)
-#elif email == "n":
-#    exit
+    except Exception as err:
+        print(type(err))
+        print(err)
+elif email == "n":
+    exit()
